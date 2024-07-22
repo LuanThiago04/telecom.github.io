@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provedor de Internet</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo ao Provedor de Internet XYZ</h1>
+        <nav>
+            <ul>
+                <li><a href="#planos-residenciais">Planos Residenciais</a></li>
+                <li><a href="#planos-empresariais">Planos Empresariais</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <h2>Internet Rápida e Confiável</h2>
+        <p>Conecte-se com o melhor provedor da sua região.</p>
+        <button onclick="showPlans()">Veja Nossos Planos</button>
+    </section>
+
+    <section id="planos-residenciais">
+        <h2>Planos Residenciais</h2>
+        <div class="plano">
+            <h3>Plano Básico</h3>
+            <p>50 Mbps por R$ 99,99/mês</p>
+            <button onclick="location.href='subscribe.html?plano=basico-residencial'">Assine Agora</button>
+        </div>
+        <div class="plano">
+            <h3>Plano Avançado</h3>
+            <p>100 Mbps por R$ 149,99/mês</p>
+            <button onclick="location.href='subscribe.html?plano=avancado-residencial'">Assine Agora</button>
+        </div>
+        <div class="plano">
+            <h3>Plano Premium</h3>
+            <p>200 Mbps por R$ 199,99/mês</p>
+            <button onclick="location.href='subscribe.html?plano=premium-residencial'">Assine Agora</button>
+        </div>
+    </section>
+
+    <section id="planos-empresariais">
+        <h2>Planos Empresariais</h2>
+        <div class="plano">
+            <h3>Plano Empresarial Básico</h3>
+            <p>500 Mbps por R$ 499,99/mês</p>
+            <button onclick="location.href='subscribe.html?plano=basico-empresarial'">Assine Agora</button>
+        </div>
+        <div class="plano">
+            <h3>Plano Empresarial Avançado</h3>
+            <p>1 Gbps por R$ 799,99/mês</p>
+            <button onclick="location.href='subscribe.html?plano=avancado-empresarial'">Assine Agora</button>
+        </div>
+        <div class="plano">
+            <h3>Plano Empresarial Premium</h3>
+            <p>2 Gbps por R$ 1299,99/mês</p>
+            <button onclick="location.href='subscribe.html?plano=premium-empresarial'">Assine Agora</button>
+        </div>
+    </section>
+
+    <section id="sobre">
+        <h2>Sobre Nós</h2>
+        <p>Somos uma empresa dedicada a fornecer o melhor serviço de internet para a sua casa ou empresa.</p>
+    </section>
+
+    <section id="contato">
+        <h2>Contato</h2>
+        <form id="contactForm">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Mensagem:</label>
+            <textarea id="message" name="message" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Provedor de Internet XYZ. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

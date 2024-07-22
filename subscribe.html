@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assine Agora - Provedor de Internet</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Assine Agora</h1>
+    </header>
+
+    <section id="subscribe">
+        <h2>Formulário de Assinatura</h2>
+        <form id="subscriptionForm" onsubmit="sendWhatsAppMessage(event)">
+            <label for="plan">Plano:</label>
+            <select id="plan" name="plan" required>
+                <option value="" disabled selected>Selecione um plano</option>
+                <option value="basico-residencial">Plano Residencial Básico: 50 Mbps por R$ 99,99/mês</option>
+                <option value="avancado-residencial">Plano Residencial Avançado: 100 Mbps por R$ 149,99/mês</option>
+                <option value="premium-residencial">Plano Residencial Premium: 200 Mbps por R$ 199,99/mês</option>
+                <option value="basico-empresarial">Plano Empresarial Básico: 500 Mbps por R$ 499,99/mês</option>
+                <option value="avancado-empresarial">Plano Empresarial Avançado: 1 Gbps por R$ 799,99/mês</option>
+                <option value="premium-empresarial">Plano Empresarial Premium: 2 Gbps por R$ 1299,99/mês</option>
+            </select>
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="phone">Telefone:</label>
+            <input type="tel" id="phone" name="phone" required>
+            <label for="cep">CEP:</label>
+            <input type="text" id="cep" name="cep" required onblur="fetchAddress()">
+            <label for="state">Estado:</label>
+            <input type="text" id="state" name="state" required>
+            <label for="city">Cidade:</label>
+            <input type="text" id="city" name="city" required>
+            <label for="street">Rua:</label>
+            <input type="text" id="street" name="street" required>
+            <label for="number">Número:</label>
+            <input type="text" id="number" name="number" required>
+            <label for="complement">Complemento:</label>
+            <input type="text" id="complement" name="complement">
+            <label for="reference">Ponto de Referência:</label>
+            <input type="text" id="reference" name="reference">
+            <button type="submit">Enviar</button>
+        </form>
+        <button id="backButton" onclick="goBack()">Voltar</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Provedor de Internet XYZ. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        function sendWhatsAppMessage(event) {
+            event.preventDefault();
+
+            const plan = document.getElementById('plan').value;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const cep = document.getElementById('cep').value;
+            const state = document.getElementById('state').value;
+            const city = document.getElementById('city').value;
+            const street = document.getElementById('street').value;
+            const number = document.getElementById('number').value;
+            const complement = document.getElementById('complement').value;
+            const reference = document.getElementById('reference').value;
+
+            const message = `Olá, gostaria de assinar o plano:\n${plan}\n\nNome: ${name}\nEmail: ${email}\nTelefone: ${phone}\n\nEndereço:\nCEP: ${cep}\nEstado: ${state}\nCidade: ${city}\nRua: ${street}, Número: ${number}\nComplemento: ${complement}\nPonto de Referência: ${reference}`;
+            const encodedMessage = encodeURIComponent(message);
+
+            const whatsappURL = `https://wa.me/YOUR_PHONE_NUMBER?text=${encodedMessage}`;
+            window.open(whatsappURL, '_blank');
+        }
+
+        function fetchAddress() {
+            const cep = document.getElementById('cep').value.replace(/\D/g, '');
+
+            if (cep !== '') {
+                const validacep = /^[0-9]{8}$/;
+
+                if (validacep.test(cep)) {
+                    const script = document.createElement('script');
+                    script.src = `https://viacep.com.br/ws/${cep}/json/?callback=populateAddress`;
+                    document.body.appendChild(script);
+                } else {
+                    clearAddress();
+                    alert("Formato de CEP inválido.");
+                }
+            } else {
+                clearAddress();
+            }
+        }
+
+        function populateAddress(content) {
+            if (!("erro" in content)) {
+                document.getElementById('state').value = content.uf;
+                document.getElementById('city').value = content.localidade;
+                document.getElementById('street').value = content.logradouro;
+            } else {
+                clearAddress();
+                alert("CEP não encontrado.");
+            }
+        }
+
+        function clearAddress() {
+            document.getElementById('state').value = '';
+            document.getElementById('city').value = '';
+            document.getElementById('street').value = '';
+        }
+    </script>
+</body>
+</html>
